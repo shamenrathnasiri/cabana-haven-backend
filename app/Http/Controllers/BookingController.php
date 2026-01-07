@@ -38,7 +38,7 @@ class BookingController extends Controller
             'room' => 'required|string|max:100',
             'checkIn' => 'required|date',
             'checkOut' => 'required|date|after:checkIn',
-            'status' => 'sometimes|string|in:check_in,check_out,not_came',
+            'status' => 'sometimes|string|in:check_in,check_out,not_came,canceled',
         ]);
 
         $booking = booking::create([
@@ -89,7 +89,7 @@ class BookingController extends Controller
             'room' => 'sometimes|string|max:100',
             'checkIn' => 'sometimes|date',
             'checkOut' => 'sometimes|date|after:checkIn',
-            'status' => 'sometimes|string|in:check_in,check_out,not_came',
+            'status' => 'sometimes|string|in:check_in,check_out,not_came,canceled',
         ]);
 
         $updateData = [];
