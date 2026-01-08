@@ -12,5 +12,6 @@ Route::get('/user', function (Request $request) {
 Route::apiResource('bookings', App\Http\Controllers\BookingController::class);
 
 Route::prefix('admin')->group(function () {
-    Route::post('login', [AdminAuthController::class, 'login']);
+Route::post('login', [AdminAuthController::class, 'login']);
 });
+Route::get('booking/status/{deleted}', [App\Http\Controllers\BookingController::class, 'getByStatus']);

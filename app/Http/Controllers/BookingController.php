@@ -112,6 +112,25 @@ class BookingController extends Controller
     }
 
     /**
+     * Get bookings by status. If status is 'deleted', include soft-deleted records.
+     */
+    public function getByStatus($status)
+    {
+        if ($status === 'deleted') {
+            $bookings = booking::withTrashed()->where('status', 'deleted')->get();
+            return response()->json($bookings, 200);
+        }
+
+        $allowed = ['check_in', 'check_out', 'not_came', 'canceled'];
+        if (!in_array($status, $allowed)) {
+            return response()->json(['message' => 'Invalid status provided'], 400);
+        }
+
+        $bookings = booking::where('status', $status)->get();
+        return response()->json($bookings, 200);
+    }
+
+    /**
      * Remove the specified resource from storage.
      */
     public function destroy(booking $booking)
