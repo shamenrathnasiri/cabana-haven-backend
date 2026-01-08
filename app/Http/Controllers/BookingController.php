@@ -38,7 +38,7 @@ class BookingController extends Controller
             'room' => 'required|string|max:100',
             'checkIn' => 'required|date',
             'checkOut' => 'required|date|after:checkIn',
-            'status' => 'sometimes|string|in:check_in,check_out,not_came,canceled',
+            'status' => 'sometimes|string|in:check_in,check_out,not_came,canceled,deleted',
         ]);
 
         $booking = booking::create([
@@ -116,6 +116,8 @@ class BookingController extends Controller
      */
     public function destroy(booking $booking)
     {
+        $booking->status = 'deleted';
+        $booking->save();
         $booking->delete();
         return response()->json([
             'message' => 'Booking deleted successfully'

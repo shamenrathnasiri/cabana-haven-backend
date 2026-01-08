@@ -21,7 +21,7 @@ return new class extends Migration
             $table->date('checkout_date');
             $table->string('room_type');
             $table->integer('number_of_guest');
-            $table->enum('status', ['check_in', 'check_out', 'not_came', 'canceled'])->default('not_came');
+            $table->enum('status', ['check_in', 'check_out', 'not_came', 'canceled', 'deleted'])->default('not_came');
             $table->timestamps();
             $table->softDeletes();
         });
